@@ -1,0 +1,18 @@
+# Railway deployment configuration
+# Run: railway up
+version: "2"
+services:
+  backend:
+    build: .
+    startCommand: node src/index.js
+    healthcheckPath: /api/health
+    variables:
+      NODE_ENV: production
+      PORT: ${{PORT}}
+      DATABASE_URL: ${{DATABASE_URL}}
+      KAFKA_BROKERS: ${{KAFKA_BROKERS}}
+      KAFKA_TOPIC: inventory-events
+      KAFKA_GROUP_ID: inventory-consumer-group
+      JWT_SECRET: ${{JWT_SECRET}}
+      ADMIN_USERNAME: ${{ADMIN_USERNAME}}
+      ADMIN_PASSWORD: ${{ADMIN_PASSWORD}}

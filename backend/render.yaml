@@ -1,0 +1,31 @@
+services:
+  - type: web
+    name: ims-backend
+    runtime: docker
+    dockerfilePath: ./Dockerfile
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: DATABASE_URL
+        fromDatabase:
+          name: ims-postgres
+          property: connectionString
+      - key: KAFKA_BROKERS
+        sync: false   # Set manually (Upstash / Confluent Cloud)
+      - key: KAFKA_TOPIC
+        value: inventory-events
+      - key: KAFKA_GROUP_ID
+        value: inventory-consumer-group
+      - key: JWT_SECRET
+        generateValue: true
+      - key: ADMIN_USERNAME
+        value: admin
+      - key: ADMIN_PASSWORD
+        sync: false   # Set to your preferred password
+
+databases:
+  - name: ims-postgres
+    databaseName: inventory_db
+    user: ims_user
+    plan: free

@@ -1,0 +1,14 @@
+{
+  "name": "ims-kafka-simulator",
+  "version": "1.0.0",
+  "description": "Kafka event producer for IMS – sends inventory-events to Redpanda/Kafka",
+  "main": "producer.js",
+  "scripts": {
+    "start": "node producer.js",
+    "produce": "node producer.js"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "kafkajs": "^2.2.4"
+  }
+}
